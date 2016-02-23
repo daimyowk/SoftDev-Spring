@@ -1,0 +1,24 @@
+var c = document.getElementById("playground");
+var button = document.getElementById("circle");
+var ctx = c.getContext("2d");
+var radius = 0;
+var increasing = true;
+var circleAnimation = function circleAnimation(e){
+    ctx.beginPath();
+    ctx.arc(269,269,radius,0,2*Math.PI);
+    if (269 + radius == 538 && increasing){
+	increaing=false;
+    }
+    if (radius == 0 && !increasing){
+	increasing=true;
+    }
+    if (increasing){
+	radius=radius+1;
+    }
+    else {
+	radius=radius-1;
+    }
+    window.requestAnimationFrame(circleAnimation);
+}
+button.addEventListener("click", circleAnimation);
+    
