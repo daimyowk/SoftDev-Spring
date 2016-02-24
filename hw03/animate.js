@@ -1,3 +1,9 @@
+/*
+Javis Wu
+SoftDev2 Pd6
+HW 03 -- Are We Ever Going to Start the Movie?
+2016-02-23
+*/
 var c = document.getElementById("playground");
 var button = document.getElementById("circle");
 var button2 = document.getElementById("stop");
