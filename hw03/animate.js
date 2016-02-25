@@ -11,12 +11,12 @@ var button3 = document.getElementById("dvd");
 var ctx = c.getContext("2d");
 var radius = 0;
 var increasing = true;
-var logo = new Image();
+/*var logo = new Image();
 var velocityX=2;
 var velocityY=1;
 var dvdx=150;
 var dvdy=100;
-logo.src="logo_dvd.jpg";
+logo.src="logo_dvd.jpg";*/
 ctx.fillStyle="red";
 ctx.strokeStyle="red";
 var circleAnimation = function circleAnimation(e){
@@ -39,7 +39,7 @@ var circleAnimation = function circleAnimation(e){
     }
     requestID=window.requestAnimationFrame(circleAnimation);
 }
-var dvdAnimation = function dvdAnimatino(){
+var dvdAnimation = function dvdAnimation(){
     ctx.beginPath();
     if (dvdx+100 >= 539 || dvdx <= 0){
 	velocityX *= -1;
@@ -56,7 +56,15 @@ var dvdAnimation = function dvdAnimatino(){
 var requestID;
 var dvdAnimation2 = function() {
     window.cancelAnimationFrame(requestID)
-    //this cancel makes it so that there won't be multiple requestIDs. the dvd wont speed up if the button is clicked multiple times.
+    //this cancel old DVD. makes it so that there won't be multiple requestIDs. the dvd wont speed up if the button is clicked multiple times.There will only be one moving DVD
+    ctx.clearRect(0,0,538,538); //clears old non moving dvd
+    var logo = new Image();
+    var velocityX=2;
+    var velocityY=1;
+    var dvdx=150;
+    var dvdy=100;
+    logo.src="logo_dvd.jpg";
+
     var dvdStuff = function(){
 	ctx.beginPath();
 	if (dvdx+100 >= 539 || dvdx <= 0){
@@ -69,7 +77,7 @@ var dvdAnimation2 = function() {
 	dvdy=dvdy+velocityY;
 	ctx.drawImage(logo,dvdx,dvdy,100,100);
 	requestID=window.requestAnimationFrame(dvdStuff);
-	// this is here to make sure the dvd keeps moving once dvdStuff is called
+	// this is here to make sure the dvd keeps moving once dvdStuff is called. will only do dvdStuff from now on until button is pressed again to reset.
     };
     dvdStuff();
 }
