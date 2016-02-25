@@ -50,15 +50,35 @@ var dvdAnimation = function dvdAnimatino(){
     dvdx=dvdx+velocityX;
     dvdy=dvdy+velocityY;
     ctx.drawImage(logo,dvdx,dvdy,100,100);
-    requestID2=window.requestAnimationFrame(dvdAnimation);
+    requestID=window.requestAnimationFrame(dvdAnimation);
     
+}
+var requestID;
+var dvdAnimation2 = function() {
+    window.cancelAnimationFrame(requestID)
+    //this cancel makes it so that there won't be multiple requestIDs. the dvd wont speed up if the button is clicked multiple times.
+    var dvdStuff = function(){
+	ctx.beginPath();
+	if (dvdx+100 >= 539 || dvdx <= 0){
+	    velocityX *= -1;
+	}
+	if (dvdy+100 >=539 || dvdy <=0){
+	    velocityY *= -1;
+	}
+	dvdx=dvdx+velocityX;
+	dvdy=dvdy+velocityY;
+	ctx.drawImage(logo,dvdx,dvdy,100,100);
+	requestID=window.requestAnimationFrame(dvdStuff);
+	// this is here to make sure the dvd keeps moving once dvdStuff is called
+    };
+    dvdStuff();
 }
 
 button.addEventListener("click", circleAnimation);
 button2.addEventListener("click", function (){
     window.cancelAnimationFrame(requestID);
 });
-button3.addEventListener("click",dvdAnimation);
+button3.addEventListener("click",dvdAnimation2);
 
     
     
