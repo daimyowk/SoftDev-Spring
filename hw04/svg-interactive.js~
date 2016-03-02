@@ -1,0 +1,41 @@
+var pic = document.getElementById("vimage");
+var intervalID;
+var button=document.getElementById("start");
+var button2=document.getElementById("stop");
+var stop=function(){
+    window.clearInterval(intervalID)
+}
+var grow=function(){
+    //init
+    var radius=0;
+    var increasing=true;
+    var c = document.createElementNS("http://www.w3.org/2000/svg","circle")
+    var animateCode = function(){
+	//increase decrease radius
+	//string to int
+	c = document.getElementByTagName("circle")[0]
+	c.setAttribute("cx",250);
+	c.setAttribute("cy",250);
+	c.setAttribute("fill","red");
+	radius = parseInt(c.getAttribute("r"));
+	
+	if (250 + radius >= 500 && increasing){
+	    increasing=false;
+	}
+	if (radius <=0 && !increasing){
+	    increasing=true;
+	}
+	if (increasing){
+	    radius=radius+1;
+	}
+	else {
+	    radius=radius-1;
+	}
+	c.setAttribute("r",radius.toString());
+	pic.appendChild(c);
+    }
+    intervalID = window.setInterval(animateCode,16);
+}
+button.addEventListener("click",grow);
+button2.addEventListener("click",stop);
+
