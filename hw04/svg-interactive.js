@@ -47,7 +47,8 @@ var dvdSetup=function(){
     var c = document.createElementNS("http://www.w3.org/2000/svg","image");
     c.setAttribute("x","100");
     c.setAttribute("y","100");
-    c.setAttribute("xlink:href","logo_dvd.jpg");
+    //c.setAttribute("xlink:href","logo_dvd.jpg");
+    c.setAttributeNS("http://www.w3.org/1999/xlink", "href", "logo_dvd.jpg");
     c.setAttribute("height", "100");
     c.setAttribute("width","100");
     //console.log(c.getAttribute("height"));
