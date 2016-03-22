@@ -84,6 +84,8 @@ window.addEventListener("click",function(){
         .selectAll("div")
 	.data(demoStateNames)
 	.enter().append("div")
+        .transition()
+        .duration(1000)
 	.style("width",function(d){
 	    console.log("doing here");
 	    return demoScale(demoStates[d])+"px";})
