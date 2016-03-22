@@ -4,6 +4,8 @@ SoftDev2 pd6
 HW05 -- The Best Defense Against Tyranny
 2016-03-22
 */
+var isRep = true;
+var republican = function(){
 var chart = document.getElementById("chart");
 states=["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
 
@@ -29,9 +31,14 @@ var scale = d3.scale.linear()
    .domain([0,d3.max(delegates)])
    .range([0,1000]);
 d3.select(".chart")
+	.selectAll("div")
+        .remove();
+d3.select(".chart")
   .selectAll("div")
     .data(states)
   .enter().append("div")
+    .transition()
+    .duration(1000)
     .style("width",function(d){
 	return scale(stats[d])+"px";})
     .style("background-color",function(d){
@@ -46,9 +53,26 @@ d3.select(".chart")
 	return d+":"+stats[d];
     });
 
+    
+d3.select("#total")
+  .html("Total Delgates:"+total);
 
+d3.select("#allotted")
+  .html("Allotted Delegates:"+allotted);
+
+d3.select("#unallotted")
+  .html("Unallotted Delegates:"+unallotted);
+
+d3.select("#party")
+        .html("Republican Party Delegates");
+
+d3.select("#title")
+        .html("Republican Convention Delegates");
+isRep=true;
+}
 
 /*DEMOCRATS*/
+var democratic = function(){
 var demoStates = {"Alabama": 53, "Alaska": 16, "Arizona": 75, "Arkansas" : 32, "California": 475, "Colorado": 66, "Connecticut": 55, "Delaware": 21, "Florida": 214, "Georgia": 102, "Hawaii": 25, "Idaho": 23,
 "Illinois": 156, "Indiana": 83, "Iowa": 44, "Kansas": 33, "Kentucky": 55, "Louisiana": 51, "Maine": 25, "Maryland": 95, "Massachusetts": 91, "Michigan": 130, "Minnesota": 77, "Mississippi": 36,
 "Missouri": 71, "Montana": 21, "Nebraska": 25, "Nevada": 35, "New Hampshire": 24, "New Jersey": 126, "New Mexico": 34, "New York": 257, "North Carolina": 107, "North Dakota": 18, "Ohio": 143, "Oklahoma": 38,
@@ -65,7 +89,6 @@ var demoScale = d3.scale.linear()
    .domain([0,d3.max(demoDelegates)])
    .range([0,1700]);
 
-window.addEventListener("click",function(){
     var demCounter=0;
     total=0;
     allotted=0;
@@ -114,13 +137,15 @@ window.addEventListener("click",function(){
 
     d3.select("#title")
         .html("Democratic Convention Delegates");
+    isRep=false;
+}
+
+republican();
+window.addEventListener("click",function (){
+    if (isRep){
+	democratic();
+    }
+    else{
+	republican();
+    }
 });
-    
-d3.select("#total")
-  .html("Total Delgates:"+total);
-
-d3.select("#allotted")
-  .html("Allotted Delegates:"+allotted);
-
-d3.select("#unallotted")
-  .html("Unallotted Delegates:"+unallotted);
