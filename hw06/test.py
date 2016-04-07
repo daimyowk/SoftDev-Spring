@@ -46,6 +46,20 @@ print passCheck("check") #false
 print passCheck("ad2d2")#false
 print passCheck("AD221dawd") #true
 
+def strengthCheck(p):
+    UC_LETTERS="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    LC_LETTERS="abcdefghijklmnopqrstuvwxyz"
+    numbers="0123456789"
+    l = [1 if x in UC_LETTERS else
+         2 if x in LC_LETTERS else
+         3 if x in NUMBERALS else
+         0 for x in p]
+    return 1 in l and 2 in l and 3 in l
+
+p2="password"
+p3="passw0rd"
+p4="Password"
+ 
 def passStrength(x):
     userPass=x
     UC_LETTERS="ABCDEFGHIJKLMNOPQRSTUVWXYZ"

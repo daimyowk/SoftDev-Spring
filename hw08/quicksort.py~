@@ -1,0 +1,5 @@
+def quicksort(x):
+    pivot=x[len(x)/2]
+    lower=x[0,pivot]
+    upper=x[pivot,len(x)]
+    
