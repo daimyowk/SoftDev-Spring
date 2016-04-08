@@ -11,19 +11,15 @@ def quicksort(case):
            else 3 
            for y in case
            ]
-    for y in range(len(hold)):
-            if hold[y]==2:
-                upper.append(case[y])
-            if hold[y]==0:
-                lower.append(case[y])
-            if hold[y]==1:
-                upper.append(case[y])
-    if upper.count(pivot)==case.count(pivot):
-        upper.remove(pivot)
+    upper=[x for x in case
+           if x>=pivot]
+    lower=[x for x in case
+           if x<pivot]
+    upper.remove(pivot)
     return quicksort(lower)+[pivot]+quicksort(upper)
 
 print quicksort([1,4,2])
 print quicksort([1,151,123,32])
-print quicksort([11,11,11,32])
+print quicksort([11,11,11,32,11])
 
 
