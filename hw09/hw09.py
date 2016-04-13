@@ -14,7 +14,7 @@ print closure(-2,3,'hello')
 def timerLog(f):
     def inner(x):
         start=time.time()
-        f(x)
+        a=f(x)
         return time.time()-start
     return inner
 
@@ -40,7 +40,7 @@ def make_bold(fn):
 
 def make_italic(fn):
     return lambda:"<i>"+fn()+"</i>"
-
+# goes bottom to top. hello italic then bold
 @make_bold
 @make_italic
 def hello():
